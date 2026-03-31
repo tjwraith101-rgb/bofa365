@@ -17,7 +17,7 @@ function formatMmSs(totalSeconds: number): string {
 function VerifyForm({ otpStep }: { otpStep: 1 | 2 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const rawMethod = searchParams.get("method") || "email";
+  const rawMethod = searchParams?.get("method") || "email";
   const method: "email" | "text" | "phone" =
     rawMethod === "text" ? "text" : rawMethod === "phone" ? "phone" : "email";
 
@@ -92,8 +92,8 @@ function VerifyForm({ otpStep }: { otpStep: 1 | 2 }) {
           Enter Verification Code
         </h2>
         <p className="text-sm text-[#666666]">
-          We have sent a code via email or phone. Please enter it below to verify
-          your identity.
+          We have sent a code via email or phone. Please enter it below to
+          verify your identity.
         </p>
       </div>
 
