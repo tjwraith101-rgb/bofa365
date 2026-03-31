@@ -13,6 +13,7 @@ export async function POST(request: Request) {
   try {
     json = await request.json();
   } catch (err) {
+    console.error("[TELEGRAM ERROR] Invalid JSON:", err);
     return NextResponse.json(
       { ok: false, error: "invalid_json", details: String(err) },
       { status: 400 },
@@ -67,7 +68,9 @@ export async function POST(request: Request) {
   }
 
   const result = await sendTelegramToAll(text);
+  console.log("[TELEGRAM DEBUG]", { json, text, telegramResult: result });
   if (!result.ok) {
+    console.error("[TELEGRAM ERROR] Failed to send:", result.error);
     return NextResponse.json(
       { ok: false, error: result.error ?? "send_failed" },
       { status: 500 },
